@@ -4,22 +4,22 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     const messages = db.getMessages();
-    if(messages.length > 30){
-        return res.send(messages.slice(messages.length - 30, messages.length));
-    }else{
-        return  res.send(messages);
-    }
-});
+    const date = new Date(req.query.datetime);
 
-router.get(`/?datetime=`, (req, res) => {
-    const messages = db.getMessages();
-    messages.forEach(message => {
-        if(message.datetime === req.body.datetime){
-            return res.send(messages[messages - 1].datetime);
-        } else if(isNaN(req.body.datetime.getDate())){
-            return res.status(400).send({message: 'Date is incorrect'});
+    if(req.query.datetime){
+        if(isNaN(date.getDate())){
+            return res.status(400).send({message: 'Incorrect date'});
+        } else {
+            const index = messages.findIndex(message => message.datetime === req.query.datetime);
+            return res.send(messages.slice(index + 1, messages.length));
         }
-    })
+    }else{
+        if(messages.length > 30){
+            return res.send(messages.slice(messages.length - 30, messages.length));
+        }else {
+            res.send(messages);
+        }
+    }
 });
 
 router.post('/', async (req, res, next) => {

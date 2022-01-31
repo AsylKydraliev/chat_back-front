@@ -9,7 +9,6 @@ module.exports = {
         try{
             const fileContents = await fs.readFile(fileName);
             messages = JSON.parse(fileContents.toString());
-            console.log(messages);
         }catch (e) {
             messages = [];
         }
