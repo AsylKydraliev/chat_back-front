@@ -1,10 +1,11 @@
 <div fxLayout="column" fxLayoutAlign="space-between center">
-  <mat-card class="example-card" *ngFor="let message of messages">
+  <mat-card class="example-card" *ngFor="let message of messages; let i = index">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image">
-      <span class="material-icons">
-        account_circle
-      </span>
+        <p>№ {{ i+1 }}</p>
+        <span class="material-icons">
+          account_circle
+        </span>
       </div>
       <mat-card-title>{{ message.author }}</mat-card-title>
       <mat-card-subtitle>{{ message.datetime }}</mat-card-subtitle>

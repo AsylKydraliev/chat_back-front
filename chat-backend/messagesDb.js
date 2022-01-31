@@ -1,14 +1,15 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const {nanoid} = require("nanoid");
 
 const fileName = './db.json';
 let messages = [];
 
 module.exports = {
-    init() {
+    async init() {
         try{
-            const fileContents = fs.readFileSync(fileName);
-            messages = JSON.parse(fileContents);
+            const fileContents = await fs.readFile(fileName);
+            messages = JSON.parse(fileContents.toString());
+            console.log(messages);
         }catch (e) {
             messages = [];
         }
@@ -19,10 +20,10 @@ module.exports = {
     addMessage(message) {
         message.id = nanoid();
         messages.push(message);
-        this.save();
+        return this.save();
     },
     save() {
-        fs.writeFileSync(fileName, JSON.stringify(messages));
+        return fs.writeFile(fileName, JSON.stringify(messages));
     }
 }
 

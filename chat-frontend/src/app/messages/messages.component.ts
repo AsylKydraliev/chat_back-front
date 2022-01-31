@@ -37,6 +37,6 @@ export class MessagesComponent implements OnInit {
   ngOnDestroy(){
     this.messagesSubscription.unsubscribe();
     this.loadingSubscription.unsubscribe();
-    this.messageService.stop();
+    // this.messageService.stop();
   }
 }

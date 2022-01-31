@@ -32,48 +32,50 @@ export class MessageService{
       .subscribe(result => {
         this.messages = [];
         this.messages = result;
+        console.log(this.messages)
         this.messagesChange.next(this.messages.slice());
         this.loadingChange.next(false);
-        this.start(this.messages[this.messages.length - 1].datetime);
+        // this.start(this.messages[this.messages.length - 1].datetime);
       });
   }
 
   postMessage(message: {}){
     this.postLoadingChange.next(true);
     this.http.post('http://localhost:8000/messages', message).subscribe(() => {
+      this.getAllMessages();
       this.postLoadingChange.next(false);
     });
   }
 
-  start(date: string){
-    const observable = new Observable<Message[]>(subscriber => {
-      this.interval = setInterval(() => {
-        this.http.get<{[id: string]: Message}>(`http://localhost:8000/messages?datetime=${date}`)
-          .pipe(
-            map(result => {
-                return Object.keys(result).map(id => {
-                  const message = result[id];
-                  return new Message(message.id, message.message, message.author, message.datetime)
-                })
-              }
-            ))
-            .subscribe(messages => {
-              if(messages.length !== 0) {
-                if(this.messages) {
-                  this.lastMessages = this.messages.concat(messages);
-                  subscriber.next(this.lastMessages.slice());
-                }
-              }
-            })
-      }, 1000)
-    });
-    observable.subscribe((messages: Message[]) => {
-      this.lastMessages = messages;
-      this.messagesChange.next(this.lastMessages.slice());
-    });
-  }
-
-  stop(){
-    clearInterval(this.interval);
-  }
+  // start(date: string){
+  //   const observable = new Observable<Message[]>(subscriber => {
+  //     this.interval = setInterval(() => {
+  //       this.http.get<{[id: string]: Message}>(`http://localhost:8000/messages?datetime=${date}`)
+  //         .pipe(
+  //           map(result => {
+  //               return Object.keys(result).map(id => {
+  //                 const message = result[id];
+  //                 return new Message(message.id, message.message, message.author, message.datetime)
+  //               })
+  //             }
+  //           ))
+  //           .subscribe(messages => {
+  //             if(messages.length !== 0) {
+  //               if(this.messages) {
+  //                 this.lastMessages = this.messages.concat(messages);
+  //                 subscriber.next(this.lastMessages.slice());
+  //               }
+  //             }
+  //           })
+  //     }, 1000)
+  //   });
+  //   observable.subscribe((messages: Message[]) => {
+  //     this.lastMessages = messages;
+  //     this.messagesChange.next(this.lastMessages.slice());
+  //   });
+  // }
+  //
+  // stop(){
+  //   clearInterval(this.interval);
+  // }
 }

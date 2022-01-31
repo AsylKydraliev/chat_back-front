@@ -28,11 +28,7 @@ export class FormComponent implements OnInit {
   }
 
   onSend() {
-    const body = {
-      message: this.postForm.value.message,
-      author: this.postForm.value.author
-    }
-
+    const body = this.postForm.value;
     this.messageService.postMessage(body);
 
     this.setFormValue({
