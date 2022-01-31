@@ -1,1 +1,14 @@
-<p>form works!</p>
+<form class="example-form" fxLayout="column" fxLayoutAlign="space-around-center" #form="ngForm"
+      (ngSubmit)="onSend()"
+>
+  <mat-form-field appearance="outline">
+    <mat-label>Author</mat-label>
+    <input matInput name="author" ngModel>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Message</mat-label>
+    <textarea matInput name="message" ngModel></textarea>
+  </mat-form-field>
+  <button mat-raised-button color="primary">Send</button>
+</form>
+
