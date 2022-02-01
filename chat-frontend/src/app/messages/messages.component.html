@@ -2,23 +2,24 @@
   <mat-spinner></mat-spinner>
 </div>
 <div fxLayout="column" fxLayoutAlign="space-between center" *ngIf="!loading" class="box">
-  <mat-card class="example-card" *ngFor="let message of messages; let i = index">
-    <div class="number">Message №{{ i+1 }}</div>
-    <mat-card-header>
-      <mat-card-title>
+  <mat-card class="example-card" *ngFor="let message of messages">
+    <mat-card-content fxLayoutAlign="space-between">
+      <div fxLayoutAlign="space-between flex-center">
         <span class="material-icons">person</span>
         <span>{{ message.author }}</span>
-      </mat-card-title>
-      <mat-card-subtitle>
+      </div>
+      <div fxLayoutAlign="space-between flex-center">
         <span class="material-icons">event</span>
         <span>{{ message.datetime }}</span>
-      </mat-card-subtitle>
-    </mat-card-header>
-    <hr>
-    <mat-card-content>
-      <span class="material-icons">email</span>
-      <span>{{ message.message }}</span>
+      </div>
     </mat-card-content>
+    <mat-divider inset></mat-divider>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title fxLayoutAlign="center center">
+        <span class="material-icons">email</span>
+        <span>{{ message.message }}</span>
+      </mat-card-title>
+    </mat-card-header>
   </mat-card>
 </div>
 

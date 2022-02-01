@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -23,21 +24,22 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     FormComponent,
     MessagesComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    FlexModule,
-    MatCardModule,
-    MatPaginatorModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatToolbarModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        FlexModule,
+        MatCardModule,
+        MatPaginatorModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
+        MatToolbarModule,
+        MatDividerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
