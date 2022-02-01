@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Message } from './message.model';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,6 @@ export class MessageService{
   loadingChange = new Subject<boolean>();
   postLoadingChange = new Subject<boolean>();
   interval!: number;
-  lastMessages: Message[] | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -47,7 +46,6 @@ export class MessageService{
   }
 
   start(date: string){
-    const observable = new Observable<Message[]>(subscriber => {
       this.interval = setInterval(() => {
         this.http.get<{[id: string]: Message}>(`http://localhost:8000/messages?datetime=${date}`)
           .pipe(
@@ -62,16 +60,11 @@ export class MessageService{
               if(messages.length !== 0) {
                 if(this.messages) {
                   this.messages?.concat(messages);
-                  subscriber.next(this.messages?.slice());
+                  this.messagesChange.next(this.messages?.slice());
                 }
               }
             })
       }, 1000)
-    });
-    observable.subscribe((messages: Message[]) => {
-      this.messages = messages;
-      this.messagesChange.next(this.messages?.slice());
-    });
   }
 
   stop(){

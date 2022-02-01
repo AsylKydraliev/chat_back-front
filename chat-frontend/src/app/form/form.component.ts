@@ -21,20 +21,11 @@ export class FormComponent implements OnInit {
     })
   }
 
-  setFormValue(value: {[key: string]: string}) {
-    setTimeout(() => {
-      this.postForm.form.setValue(value);
-    })
-  }
-
   onSend() {
     const body = this.postForm.value;
     this.messageService.postMessage(body);
 
-    this.setFormValue({
-      author: '',
-      message: '',
-    })
+    this.postForm.resetForm();
   }
 
   ngOnDestroy(){

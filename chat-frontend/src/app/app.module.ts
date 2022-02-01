@@ -12,6 +12,10 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -19,17 +23,21 @@ import { HttpClientModule } from '@angular/common/http';
     FormComponent,
     MessagesComponent
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        FlexModule,
-        MatCardModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FlexModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatToolbarModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -4,5 +4,5 @@ export class Message{
     public message: string,
     public author: string,
     public datetime: string,
-){}
+  ){}
 }
